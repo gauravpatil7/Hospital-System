@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hospital.Dal\Hospital.Dal.csproj" />
+  </ItemGroup>
+
 </Project>

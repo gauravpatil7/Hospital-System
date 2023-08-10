@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Hospital.Dal.Models
 {
@@ -18,6 +19,7 @@ namespace Hospital.Dal.Models
         public string? Dimage { get; set; }
 
         public virtual Hospital? WorksinNavigation { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Appontment> Appontments { get; set; }
     }
 }
