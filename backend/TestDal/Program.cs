@@ -1,6 +1,4 @@
-﻿using Hospital.Dal;
-using Hospital.Dal.Models;
-
+﻿
 namespace TestDal
 {
     internal class Program
@@ -27,24 +25,24 @@ namespace TestDal
             //    throw;
             //}
 
-            List<Appontment> ll;
-            try
-            {
-                HospitalRepo HRepoObj = new HospitalRepo();
-                ll = HRepoObj.GetAppointments();
-                foreach (Appontment item in ll) {
-                    Console.WriteLine(item.Hospitalid);
-                    Console.WriteLine(item.Appontmentid);
-                    Console.WriteLine(item.Userid);
-                    Console.WriteLine(item.Appointmenttime);
-                    Console.WriteLine(  "__________________________________________________________________");
-                }
-            }
-            catch (Exception)
-            {
+            //List<Appontment> ll;
+            //try
+            //{
+            //    HospitalRepo HRepoObj = new HospitalRepo();
+            //    ll = HRepoObj.GetAppointments();
+            //    foreach (Appontment item in ll) {
+            //        Console.WriteLine(item.Hospitalid);
+            //        Console.WriteLine(item.Appontmentid);
+            //        Console.WriteLine(item.Userid);
+            //        Console.WriteLine(item.Appointmenttime);
+            //        Console.WriteLine(  "__________________________________________________________________");
+            //    }
+            //}
+            //catch (Exception)
+            //{
 
-                throw;
-            }
+            //    throw;
+            //}
         }
     }
 }

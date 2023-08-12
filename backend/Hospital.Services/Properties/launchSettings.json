@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:42192",
-      "sslPort": 44386
+      "applicationUrl": "http://localhost:43141",
+      "sslPort": 44310
     }
   },
   "profiles": {
@@ -13,8 +13,8 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "home/GetDoctors",
-      "applicationUrl": "https://localhost:7298;http://localhost:5153",
+      "launchUrl": "weatherforecast",
+      "applicationUrl": "https://localhost:7031;http://localhost:5099",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
