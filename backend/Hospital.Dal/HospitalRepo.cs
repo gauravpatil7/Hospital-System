@@ -1,5 +1,6 @@
 ﻿using Hospital.Dal.Models;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Hospital.Dal
 {
@@ -12,7 +13,7 @@ namespace Hospital.Dal
         }
         #region getters
         
-        public List<Doctor> getDoctors()
+        public List<Doctor> GetDoctors()
         {
             List<Doctor> DoctorsList = new List<Doctor>();
             try
@@ -27,7 +28,7 @@ namespace Hospital.Dal
             return DoctorsList;
         }
 
-        public List<Hospitall> getHospitals()
+        public List<Hospitall> GetHospitals()
         {
             List<Hospitall> HospitalList = new List<Hospitall>();
             try
@@ -90,25 +91,25 @@ namespace Hospital.Dal
 
             return Doc;
         }
-        public List<Appontment> UserAppintments(int userId)
+        public List<Appontment> UserAppintments(String userId)
         {
-            List<Appontment> Ul = new List<Appontment>();
+            List<Appontment> userAppointmentList = new List<Appontment>();
             try
             {
-                //Ul = 
+                userAppointmentList = (from n in HpContext.Appontments where n.Userid==userId select n).ToList();
             }
             catch (Exception)
             {
                 Console.WriteLine("error while fecting appointments");
             }
-            return Ul;
+            return userAppointmentList;
         }
         public List<Appontment> DoctorAppintments(int DoctorId)
         {
             List<Appontment> Dl = new List<Appontment>();
             try
             {
-                //Dl = (from Dl in HpContext.Appontments where Dl.Doctorid == DoctorId select Dl).ToList();
+                Dl = (from l in HpContext.Appontments where l.Doctorid==DoctorId select l).ToList<Appontment>();
             }
             catch (Exception)
             {
@@ -122,7 +123,7 @@ namespace Hospital.Dal
             Hospitall hospital = new Hospitall();
             try
             {
-                hospital = (from h in HpContext.Hospitalls where h.Hospitalid == HId select h).FirstOrDefault();
+                hospital = (from h in HpContext.Hospitalls where h.Hospitalid == HId select h).First();
             }
             catch (Exception)
             {

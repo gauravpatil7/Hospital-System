@@ -5,7 +5,7 @@ using Hospital.Dal.Models;
 
 HospitalRepo Hr= new HospitalRepo();
 List<Hospitall> hl = new List<Hospitall>();
-hl = Hr.getHospitals();
+hl = Hr.GetHospitals();
 foreach (Hospitall item in hl)
 {
     Console.WriteLine( item.Hospitalid);

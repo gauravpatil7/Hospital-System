@@ -13,14 +13,14 @@ namespace Hospital.Services.Controllers
         {
             Repo = new HospitalRepo();
         }
-
+        #region getters
         [HttpGet]
         public JsonResult GetDoctors()
         {
             List<Doctor> Dl = new List<Doctor>();
             try
             {
-                Dl = Repo.getDoctors();
+                Dl = Repo.GetDoctors();
                 return Json(Dl);
             }
             catch (Exception)
@@ -31,11 +31,47 @@ namespace Hospital.Services.Controllers
 
         }
         [HttpGet]
+        public JsonResult GetHospitals()
+        {
+            List<Hospitall> hl= new List<Hospitall>();
+            try
+            {
+                hl = Repo.GetHospitals();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Json(hl);    
+        }
+
+        [HttpGet]
+        public JsonResult GetAppointments()
+        {
+            List<Appontment> appointmentList = new List<Appontment>();
+            try
+            {
+                appointmentList = Repo.GetAppointments();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Json(appointmentList);
+        }
+        [HttpGet]
         public JsonResult GetUsers()
         {
             List<User> userList= new List<User>();
             return Json(userList);
         }
+        
+        #endregion
+
+
+        #region get by Id
 
         [HttpGet]
         public JsonResult GetDoctorsById(int id)
@@ -53,5 +89,33 @@ namespace Hospital.Services.Controllers
             }
 
         }
+        public JsonResult GetUserAppintments(String id)
+        {
+            List <Appontment> userAppointMents = new List<Appontment>();
+            try
+            {
+                userAppointMents = Repo.UserAppintments(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Json(userAppointMents);
+        }
+        [HttpGet]
+        public JsonResult DoctorAppintments(int DoctorId)
+        {
+            List<Appontment> doctorAppointments = new List<Appontment>();
+            try
+            {
+                doctorAppointments = Repo.DoctorAppintments(DoctorId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Json(doctorAppointments);
+        }
+        #endregion
     }
 }
