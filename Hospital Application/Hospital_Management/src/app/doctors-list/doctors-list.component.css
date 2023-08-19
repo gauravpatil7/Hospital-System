@@ -1,0 +1,20 @@
+mat-card{
+    background:  #FEFEFE;
+    color:black;
+    height:350px;
+    width:270px;
+    margin: 16px;
+}
+.btn {
+  background: blueviolet;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.CardGrid{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:center;
+}

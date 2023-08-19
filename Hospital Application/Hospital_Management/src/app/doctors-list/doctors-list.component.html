@@ -1,1 +1,19 @@
-<p>doctors-list works!</p>
+<div class="CardGrid">
+<div *ngFor="let doctor of DoctorList">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title style="text-align:left">
+        Dr. {{doctor.dname}}
+        <mat-divider></mat-divider>
+        {{doctor.degree}}
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{doctor.dimage}}>
+    <mat-card-actions>
+      <button class="btn" mat-raised-button>
+        Book Appointment
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>

@@ -9,6 +9,20 @@ namespace Hospital.Services
             // Add services to the container.
 
             builder.Services.AddControllers();
+            // Default Policy
+            // Default Policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+            });
+            // Named Policy
+
 
             var app = builder.Build();
 
@@ -16,8 +30,9 @@ namespace Hospital.Services
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

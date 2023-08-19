@@ -1,1 +1,33 @@
-<p>nav works!</p>
+<mat-toolbar>
+  <button mat-button (click)="munuClicked()"><mat-icon style="margin-right:8px">menu</mat-icon></button>
+  Wellcome To Hospital System
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav>
+    <img class="PImg mat-elevation-z2" src="../../assets/UnknownProfile.jpg">
+    <h1>Hi Gaurav</h1>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button">
+      <mat-icon>home</mat-icon>
+      <span>home</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>settings_accessibility</mat-icon>
+      <span>My Appointments</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>settings</mat-icon>
+      <span>settings</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>info</mat-icon>
+      <span>About</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <div class="content mat-elevation-z2">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
