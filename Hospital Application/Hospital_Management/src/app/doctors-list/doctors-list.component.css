@@ -4,12 +4,15 @@ mat-card{
     height:350px;
     width:270px;
     margin: 16px;
+    padding:10px;
+}
+.img {
+  border-radius: 5px;
 }
 .btn {
   background: blueviolet;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 .CardGrid{

@@ -14,12 +14,14 @@ export class NavComponent {
 
   }
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe(
+    this.observer.observe(['(max-width:800px)']).subscribe(
       (res) => {
-        if (res) {
-          console.log("destop");
+        if (res.matches) {
+          this.navBar.mode = 'over';
+          this.navBar.close();
         } else {
-          console.log("tablet");
+          this.navBar.mode = 'side';
+          this.navBar.open();
         }
       }
     );

@@ -4,11 +4,11 @@
     <mat-card-header>
       <mat-card-title style="text-align:left">
         Dr. {{doctor.dname}}
-        <mat-divider></mat-divider>
-        {{doctor.degree}}
+        <mat-card-subtitle style="color:black">{{doctor.degree}}</mat-card-subtitle>
       </mat-card-title>
+      <mat-card-subtitle>gaurav</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src={{doctor.dimage}}>
+    <img class="img" mat-card-image src={{doctor.dimage}}>
     <mat-card-actions>
       <button class="btn" mat-raised-button>
         Book Appointment
