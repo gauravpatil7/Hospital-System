@@ -65,6 +65,15 @@ namespace Hospital.Services.Controllers
         public JsonResult GetUsers()
         {
             List<User> userList= new List<User>();
+            try
+            {
+                userList=Repo.GetUsers();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return Json(userList);
         }
         
@@ -89,32 +98,48 @@ namespace Hospital.Services.Controllers
             }
 
         }
-        public JsonResult GetUserAppintments(String id)
+        [HttpGet]
+        public JsonResult GetUserAppointments(String id)
         {
-            List <Appontment> userAppointMents = new List<Appontment>();
+            List <Appontment> userAppointments = new List<Appontment>();
             try
             {
-                userAppointMents = Repo.UserAppintments(id);
+                userAppointments = Repo.UserAppointments(id);
             }
             catch (Exception)
             {
                 throw;
             }
-            return Json(userAppointMents);
+            return Json(userAppointments);
         }
         [HttpGet]
-        public JsonResult DoctorAppintments(int DoctorId)
+        public JsonResult DoctorAppointments(int DoctorId)
         {
             List<Appontment> doctorAppointments = new List<Appontment>();
             try
             {
-                doctorAppointments = Repo.DoctorAppintments(DoctorId);
+                doctorAppointments = Repo.DoctorAppointments(DoctorId);
             }
             catch (Exception)
             {
                 throw;
             }
             return Json(doctorAppointments);
+        }
+
+        [HttpPost]
+        public JsonResult CheckValidUser(User userObj)
+        {
+            bool result = false;
+            try
+            {
+                result = Repo.checkValidUser(userObj);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return Json(result);
         }
         #endregion
     }

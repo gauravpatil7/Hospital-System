@@ -1,0 +1,45 @@
+<div class="form-container mat-elevation-z2" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px">
+  <button mat-raised-button (click)="logOrReg('login')" style="color:white; Background : blueviolet; margin:10px">Login</button>
+  <button mat-raised-button (click)="logOrReg('register')" style="color: white; Background: blueviolet; margin:10px">Register</button>
+</div>
+
+<!-----------------------------Login------------------------------->
+<div *ngIf="login; else elseBlock" class="form-container mat-elevation-z2" style="border-top-left-radius: 0px; border-top-right-radius: 0px">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Email Address" formControlName="emailRef" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
+    </mat-form-field>
+    <div>
+      <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+    </div>
+  </form>
+</div>
+
+
+<!-----------------------------Register----------------------------->
+<ng-template #elseBlock>
+  <div class="form-container mat-elevation-z2" style="border-top-left-radius: 0px; border-top-right-radius: 0px">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Email Address" formControlName="emailRef" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
+      </mat-form-field>
+      <div>
+        <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

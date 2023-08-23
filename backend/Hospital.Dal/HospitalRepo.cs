@@ -75,6 +75,52 @@ namespace Hospital.Dal
         #endregion
 
         #region getters by Id
+
+        
+        public bool checkValidUser(User obj)
+        {
+            bool status = false;
+            User userObj = new User();
+            try
+            {
+                userObj=(from user in HpContext.Users where obj.Mailid.Equals(user.Mailid)  select user).FirstOrDefault();
+                if(userObj != null && userObj.Password==obj.Password)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return status;
+            }
+        }
+
+        public bool registerUser(User obj)
+        {
+            bool status = false;
+            User userObj = new User();
+            try
+            {
+                userObj = (from user in HpContext.Users where obj.Mailid.Equals(user.Mailid) select user).FirstOrDefault();
+                if (userObj != null && userObj.Password == obj.Password)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return status;
+            }
+        }
+
         public Doctor GetDoctorsById(int id)
         {
             Doctor Doc = new Doctor();
@@ -91,7 +137,7 @@ namespace Hospital.Dal
 
             return Doc;
         }
-        public List<Appontment> UserAppintments(String userId)
+        public List<Appontment> UserAppointments(String userId)
         {
             List<Appontment> userAppointmentList = new List<Appontment>();
             try
@@ -104,7 +150,7 @@ namespace Hospital.Dal
             }
             return userAppointmentList;
         }
-        public List<Appontment> DoctorAppintments(int DoctorId)
+        public List<Appontment> DoctorAppointments(int DoctorId)
         {
             List<Appontment> Dl = new List<Appontment>();
             try
@@ -113,7 +159,7 @@ namespace Hospital.Dal
             }
             catch (Exception)
             {
-                Console.WriteLine("error while fecting appointments");
+                Console.WriteLine("error while fetching appointments");
             }
             return Dl;
         }

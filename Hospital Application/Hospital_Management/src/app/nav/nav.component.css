@@ -6,6 +6,7 @@ mat-toolbar{
 mat-sidenav-container{
 background: rgb(245, 235, 255);
 height: calc(100vh - 65px);
+color:white;
 }
 
 mat-sidenav{
@@ -16,14 +17,19 @@ mat-sidenav{
     border-radius: 16px;
     padding: 10px;
 }
+.sidenav-btn{
+    color:white;
+}
 .content {
   background: rgb(248, 241, 252);
   margin: 10px;
   margin-left: 16px;
   border-radius: 16px;
-
+  min-height:calc(100vh - 96px);
   
     display: flex;
+    align-items:center;
+    justify-content:center;
 
 }
 .PImg{
