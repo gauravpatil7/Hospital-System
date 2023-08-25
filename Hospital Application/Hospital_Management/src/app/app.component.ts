@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +7,14 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild(MatSidenav) mat!: MatSidenav;
   title = 'Hospital_Management';
-  constructor(private observer: BreakpointObserver) {
-    this.ngAfterViewInit();
-  }
-  ngAfterViewInit() {
-    this.observer.observe('[(max-width:800px)]').subscribe(
-      (res) => {
-        //if (res) {
-        //  this.mat.mode = 'over';
-        //  this.mat.open();
-        //  console.log("desktop mode");
-        //} else {
-        //  this.mat.mode = 'side';
-        //  this.mat.open();
-        //  console.log("tablet mode");
-        //}
-      }
-    );
-  }
+  status = false;
+  constructor(private _router: Router) {
 
+  }
+  ngOnInit() {
+    if (sessionStorage.getItem('username') == null) {
+      this.status = true;
+    }
+  }
 }

@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { NormalNavComponent } from './normal-nav/normal-nav.component';
 
 
 
@@ -31,6 +32,7 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
     DoctorsListComponent,
     LoginComponent,
     UserAppointmentsComponent,
+    NormalNavComponent,
 
   ],
   imports: [

@@ -15,7 +15,7 @@
       <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
     </mat-form-field>
     <div>
-      <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+      <button mat-raised-button  style="background: blueviolet; color:white"  type="submit" [disabled]="!loginForm.valid">Login</button>
     </div>
   </form>
 </div>
@@ -24,21 +24,51 @@
 <!-----------------------------Register----------------------------->
 <ng-template #elseBlock>
   <div class="form-container mat-elevation-z2" style="border-top-left-radius: 0px; border-top-right-radius: 0px">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Email Address" formControlName="emailRef" required />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter Password" formControlName="passwordRef" required />
+        <input matInput type="email" placeholder="Email Address" formControlName="mailId" />
       </mat-form-field>
       <div>
-        <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+        <mat-form-field style="width:37%; margin-right:10px">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" placeholder="First Name" formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field style="width:37%">
+          <mat-label>last Name</mat-label>
+          <input matInput type="text" placeholder="last Name" formControlName="lastName" />
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>username</mat-label>
+        <input matInput type="email" placeholder="User Name" formControlName="username" />
+      </mat-form-field>
+
+      <!--gender-->
+      <!--pastproblems-->
+      <mat-form-field>
+        <mat-label>Past Problems If Any</mat-label>
+        <input matInput type="text" placeholder="Like, sergeries or alergies" formControlName="pastproblems" />
+      </mat-form-field>
+      <!--contactnumber-->
+      <mat-form-field>
+        <mat-label>Conatct Number</mat-label>
+        <input matInput type="number" placeholder="Contact Number" formControlName="contactNumber" />
+      </mat-form-field>
+      <!--userAddress-->
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput type="text" placeholder="Address" formControlName="userAddress" />
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Enter Password" formControlName="password" required />
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button style="background: blueviolet; color:white" type="submit" [disabled]="!registerForm.valid">Register</button>
       </div>
     </form>
   </div>

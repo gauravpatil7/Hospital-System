@@ -25,6 +25,12 @@ export class DoctorsService {
     let result = this.http.post<boolean>('https://localhost:7031/home/CheckValidUser', userObj ).pipe(catchError(this.errorhandler));
     return result;
   }
+
+  registerNewUser(newUserObj: IUser): Observable<boolean>{
+    let result = this.http.post<boolean>('https://localhost:7031/home/registerNewUser', newUserObj);
+    return result;
+  }
+
   errorhandler(error: HttpErrorResponse) {
     console.log(error.message)
     return throwError(error.message || "Server Error");

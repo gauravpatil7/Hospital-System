@@ -142,5 +142,22 @@ namespace Hospital.Services.Controllers
             return Json(result);
         }
         #endregion
+
+        #region stored procedue
+        [HttpPost]
+        public bool registerNewUser(User userObj)
+        {
+            bool status = false;
+            try
+            {
+               return status = Repo.registerNewUser(userObj);
+            }
+            catch (Exception)
+            {
+
+                return status;
+            }
+        }
+        #endregion
     }
 }

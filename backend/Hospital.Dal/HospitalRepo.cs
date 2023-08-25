@@ -1,4 +1,6 @@
 ﻿using Hospital.Dal.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -99,27 +101,27 @@ namespace Hospital.Dal
             }
         }
 
-        public bool registerUser(User obj)
-        {
-            bool status = false;
-            User userObj = new User();
-            try
-            {
-                userObj = (from user in HpContext.Users where obj.Mailid.Equals(user.Mailid) select user).FirstOrDefault();
-                if (userObj != null && userObj.Password == obj.Password)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                return status;
-            }
-        }
+        //public bool registerUser(User obj)
+        //{
+        //    bool status = false;
+        //    User userObj = new User();
+        //    try
+        //    {
+        //        userObj = (from user in HpContext.Users where obj.Mailid.Equals(user.Mailid) select user).FirstOrDefault();
+        //        if (userObj != null && userObj.Password == obj.Password)
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return status;
+        //    }
+        //}
 
         public Doctor GetDoctorsById(int id)
         {
@@ -208,6 +210,45 @@ namespace Hospital.Dal
             }
             return status;
         }
+        #endregion
+
+        #region stored procedue
+        /*DECLARE 
+@mailid @username @gender @pastproblems @contact @useraddress @password @firstname  @lastname varchar(10)='HUGY'
+EXEC USP_USERREGISTER @mailid, @username, @gender, @pastproblems, @contact, @useraddress, @password, @firstname, @lastname
+         */
+        public bool registerNewUser(User newUserObj)
+        {
+            int result;
+            try
+            {
+
+                SqlParameter Email = new SqlParameter("@mailid", newUserObj.Mailid);
+                SqlParameter username = new SqlParameter("@username", newUserObj.Username);
+                SqlParameter gender = new SqlParameter("@gender", newUserObj.Gender);
+                SqlParameter pastproblems = new SqlParameter("@pastproblems", newUserObj.Pastproblems);
+                SqlParameter contact = new SqlParameter("@contact", newUserObj.Contactumber);
+                SqlParameter useraddress = new SqlParameter("@useraddress", newUserObj.Useraddress);
+                SqlParameter password = new SqlParameter("@password", newUserObj.Password);
+                SqlParameter firstname = new SqlParameter("@firstname", newUserObj.Firstname);
+                SqlParameter lastname = new SqlParameter("@lastname", newUserObj.Lastname);
+
+                result = HpContext.Database.ExecuteSqlRaw("EXEC USP_USERREGISTER @mailid, @username, @gender, @pastproblems, @contact, @useraddress, @password, @firstname, @lastname", Email, username, gender, pastproblems, contact, useraddress, password, firstname, lastname);
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        
         #endregion
 
     }

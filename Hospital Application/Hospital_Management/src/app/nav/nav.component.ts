@@ -8,10 +8,18 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
+  username:any;
+
   @ViewChild(MatSidenav)
   navBar!: MatSidenav;
   constructor(private observer: BreakpointObserver) {
 
+  }
+  ngOnInit() {
+    if (sessionStorage.getItem('username')!=null) {
+      this.username = sessionStorage.getItem('username');
+    }
+    
   }
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe(

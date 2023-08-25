@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IDoctor } from '../Interfaces/Doctor';
 import { DoctorsService } from '../../services/doctors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctors-list',
@@ -9,10 +10,13 @@ import { DoctorsService } from '../../services/doctors.service';
 })
 export class DoctorsListComponent {
   DoctorList: any;
-  constructor(private DoctorsService: DoctorsService) {
+  constructor(private DoctorsService: DoctorsService, private _router:Router) {
 
   }
   ngOnInit() {
+    if (sessionStorage.getItem('username') == null) {
+      this._router.navigate(['/register']);
+    }
     this.getDoctors();
   }
 

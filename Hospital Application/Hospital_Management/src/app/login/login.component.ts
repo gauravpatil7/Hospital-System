@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControlName, FormControl, EmailValidator, Validators } from '@angular/forms';
-import { MatSidenav } from '@angular/material/sidenav';
 import { DoctorsService } from '../../services/doctors.service';
+import { IUser } from '../Interfaces/User';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,17 +15,30 @@ export class LoginComponent {
     passwordRef: new FormControl('', [Validators.minLength(4), Validators.maxLength(10), /*Validators.pattern('[a-z0-9A-Z]')*/]),
   });
 
-  @ViewChild(MatSidenav) mat!: MatSidenav;
-  result: any;
+
+  registerForm = new FormGroup({
+    mailId: new FormControl('', [Validators.email, Validators.required]),
+    username: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
+    gender: new FormControl('MALE'),
+    pastproblems: new FormControl(''),
+    contactNumber: new FormControl(234567890, [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
+    userAddress: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), /*Validators.pattern('[a-z0-9A-Z]')*/]),
+    firstName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10),Validators.required]),
+    lastName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
+  });
+
+  
   login: boolean;
   emailRef: string;
-  passwordRef: string;
   constructor(private _service: DoctorsService, private router: Router) {
     this.login = false;
     this.emailRef = "";
-    this.passwordRef = "";
   }
   ngOnInit() {
+    if (sessionStorage.getItem('username') != null) {
+      this.router.navigate(['/doctorslist']);
+    }
   }
 
   logOrReg(btnType: string) {
@@ -37,13 +50,42 @@ export class LoginComponent {
   }
   onSubmit() {
     this.emailRef = <string>this.loginForm.value.emailRef;
-    this.passwordRef = <string>this.loginForm.value.passwordRef;
-    this.result = this._service.CheckValidUser(this.emailRef, this.passwordRef).subscribe(
+    let result = this._service.CheckValidUser(this.emailRef, <string>this.loginForm.value.passwordRef).subscribe(
       (res) => {
         if (res == true) {
           sessionStorage.setItem('Email', this.emailRef);
-          this.router.navigate(['/userappointments']);
+          //needs to implement
+          sessionStorage.setItem('username', this.emailRef);
+
+          this.router.navigate(['/doctorslist']);
         } else {
+        }
+      }
+    );
+  }
+  onRegisterSubmit() {
+    let newUserObj: IUser;
+    newUserObj = {
+      Mailid: <string>this.registerForm.value.mailId,
+      Password: <string>this.registerForm.value.password,
+      Gender: <string>this.registerForm.value.gender,
+      Username: <string>this.registerForm.value.username,
+      Useraddress: <string>this.registerForm.value.userAddress,
+      Pastproblems: <string>this.registerForm.value.pastproblems,
+      Contactumber: <number>this.registerForm.value.contactNumber,
+      Firstname: <string>this.registerForm.value.firstName,
+      Lastname: <string>this.registerForm.value.lastName,
+    };
+
+    this._service.registerNewUser(newUserObj).subscribe(
+      (res) => {
+        if (res == true) {
+          console.log("register successfully");
+          sessionStorage.setItem('username', newUserObj.Firstname);
+          sessionStorage.setItem('Email', newUserObj.Mailid);
+          this.router.navigate(['/doctorslist']);
+        } else {
+          console.log("register unsuccessful");
         }
       }
     );
