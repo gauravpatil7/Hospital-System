@@ -19,7 +19,6 @@ export class LoginComponent {
   registerForm = new FormGroup({
     mailId: new FormControl('', [Validators.email, Validators.required]),
     username: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
-    gender: new FormControl('MALE'),
     pastproblems: new FormControl(''),
     contactNumber: new FormControl(234567890, [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
     userAddress: new FormControl('', Validators.required),
@@ -31,16 +30,14 @@ export class LoginComponent {
   
   login: boolean;
   emailRef: string;
+  gender: string="";
   constructor(private _service: DoctorsService, private router: Router) {
     this.login = false;
     this.emailRef = "";
   }
   ngOnInit() {
-    if (sessionStorage.getItem('username') != null) {
-      this.router.navigate(['/doctorslist']);
-    }
   }
-
+  //btnchange
   logOrReg(btnType: string) {
     if (btnType == 'login') {
       this.login = true;
@@ -48,27 +45,33 @@ export class LoginComponent {
       this.login = false;
     }
   }
+  //login submit
   onSubmit() {
     this.emailRef = <string>this.loginForm.value.emailRef;
-    let result = this._service.CheckValidUser(this.emailRef, <string>this.loginForm.value.passwordRef).subscribe(
+    this._service.CheckValidUser(this.emailRef, <string>this.loginForm.value.passwordRef).subscribe(
       (res) => {
         if (res == true) {
           sessionStorage.setItem('Email', this.emailRef);
           //needs to implement
           sessionStorage.setItem('username', this.emailRef);
-
-          this.router.navigate(['/doctorslist']);
-        } else {
+          window.location.reload();
         }
       }
     );
   }
+  //selector
+  selectorOnChange($event: any) {
+    this.gender = $event.value;
+    console.log(this.gender);
+  }
+
+  //register
   onRegisterSubmit() {
     let newUserObj: IUser;
     newUserObj = {
       Mailid: <string>this.registerForm.value.mailId,
       Password: <string>this.registerForm.value.password,
-      Gender: <string>this.registerForm.value.gender,
+      Gender: this.gender,
       Username: <string>this.registerForm.value.username,
       Useraddress: <string>this.registerForm.value.userAddress,
       Pastproblems: <string>this.registerForm.value.pastproblems,
@@ -83,11 +86,13 @@ export class LoginComponent {
           console.log("register successfully");
           sessionStorage.setItem('username', newUserObj.Firstname);
           sessionStorage.setItem('Email', newUserObj.Mailid);
-          this.router.navigate(['/doctorslist']);
+          this.router.navigate(['']);
+          this.ngOnInit();
         } else {
           console.log("register unsuccessful");
         }
       }
     );
+    console.log(this.registerForm.value);
   }
 }

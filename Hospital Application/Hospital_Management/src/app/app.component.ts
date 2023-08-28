@@ -13,7 +13,7 @@ export class AppComponent {
 
   }
   ngOnInit() {
-    if (sessionStorage.getItem('username') == null) {
+    if (sessionStorage.getItem('username') != null) {
       this.status = true;
     }
   }

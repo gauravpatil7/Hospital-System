@@ -16,10 +16,6 @@ export class NavComponent {
 
   }
   ngOnInit() {
-    if (sessionStorage.getItem('username')!=null) {
-      this.username = sessionStorage.getItem('username');
-    }
-    
   }
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe(

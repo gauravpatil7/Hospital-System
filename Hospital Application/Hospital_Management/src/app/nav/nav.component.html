@@ -7,15 +7,20 @@
     <img class="PImg mat-elevation-z2" src="../../assets/UnknownProfile.jpg">
     <h1>{{username}}</h1>
     <mat-divider></mat-divider>
-    <button mat-raised-button style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start;">
+    <button mat-raised-button routerLink="" style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start;">
       <mat-icon>home</mat-icon>
       <span>home</span>
     </button>
-    <button mat-raised-button style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start;">
+
+    <button mat-raised-button routerLink="/userAppointments" style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start;">
       <mat-icon>settings_accessibility</mat-icon>
       <span>My Appointments</span>
     </button>
 
+    <button mat-raised-button routerLink="/bookAppointments" style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start;">
+      <mat-icon>settings_accessibility</mat-icon>
+      <span>Book Appointment</span>
+    </button>
     <button mat-raised-button style="margin-top: 10px; margin-bottom: 10px; color: white; background: blueviolet; width: 100%; display: flex; align-items: center; justify-content: flex-start; ">
       <mat-icon>settings</mat-icon>
       <span>settings</span>

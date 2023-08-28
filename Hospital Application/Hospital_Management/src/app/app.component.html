@@ -1,10 +1,10 @@
 <div style="text-align:center">
   <div *ngIf="status; else elseblock">
-    <app-normal-nav></app-normal-nav>
+    <app-nav></app-nav>
   </div>
   <ng-template #elseblock>
     <div>
-      <app-nav></app-nav>
+      <app-normal-nav></app-normal-nav>
     </div>
   </ng-template>
 </div>

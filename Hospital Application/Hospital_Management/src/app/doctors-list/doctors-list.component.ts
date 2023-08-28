@@ -14,9 +14,6 @@ export class DoctorsListComponent {
 
   }
   ngOnInit() {
-    if (sessionStorage.getItem('username') == null) {
-      this._router.navigate(['/register']);
-    }
     this.getDoctors();
   }
 

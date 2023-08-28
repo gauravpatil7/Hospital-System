@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,18 +21,21 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { NormalNavComponent } from './normal-nav/normal-nav.component';
+import { DoctorsAppointmentsComponent } from './doctors-appointments/doctors-appointments.component';
+import { BookAppointmentsComponent } from './book-appointments/book-appointments.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavComponent,
     DoctorsListComponent,
     LoginComponent,
     UserAppointmentsComponent,
     NormalNavComponent,
+    DoctorsAppointmentsComponent,
+    BookAppointmentsComponent,
 
   ],
   imports: [
@@ -48,7 +51,8 @@ import { NormalNavComponent } from './normal-nav/normal-nav.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
