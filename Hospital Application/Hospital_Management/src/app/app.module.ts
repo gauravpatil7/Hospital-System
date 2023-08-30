@@ -23,6 +23,7 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
 import { NormalNavComponent } from './normal-nav/normal-nav.component';
 import { DoctorsAppointmentsComponent } from './doctors-appointments/doctors-appointments.component';
 import { BookAppointmentsComponent } from './book-appointments/book-appointments.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
@@ -36,6 +37,7 @@ import { BookAppointmentsComponent } from './book-appointments/book-appointments
     NormalNavComponent,
     DoctorsAppointmentsComponent,
     BookAppointmentsComponent,
+    AboutUsComponent,
 
   ],
   imports: [

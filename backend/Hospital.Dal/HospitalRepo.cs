@@ -148,7 +148,7 @@ namespace Hospital.Dal
             }
             catch (Exception)
             {
-                Console.WriteLine("error while fecting appointments");
+                Console.WriteLine("error while fetching appointments");
             }
             return userAppointmentList;
         }
@@ -179,6 +179,23 @@ namespace Hospital.Dal
                 throw;
             }
             return hospital;
+        }
+
+        public List<UserAppointments> GetUserAppointments(string emailId)
+        {
+            List<UserAppointments> ll = new List<UserAppointments>();
+            try
+            {
+                SqlParameter emailParam = new SqlParameter("@mailId", emailId);
+               ll= HpContext.UsersAppointments.FromSqlRaw("select * from UFN_USERAPPOINTMENTS_BY_ID(@mailId)", emailParam).ToList();
+
+                //(from a in HpContext)
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return ll;
         }
 
         #endregion

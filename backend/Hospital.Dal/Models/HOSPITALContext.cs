@@ -20,6 +20,7 @@ namespace Hospital.Dal.Models
         public virtual DbSet<Doctor> Doctors { get; set; } = null!;
         public virtual DbSet<Hospitall> Hospitalls { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<UserAppointments> UsersAppointments { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

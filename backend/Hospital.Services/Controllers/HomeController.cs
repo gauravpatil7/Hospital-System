@@ -1,6 +1,8 @@
 ﻿using Hospital.Dal;
 using Hospital.Dal.Models;
+using Hospital.Services.Models;
 using Microsoft.AspNetCore.Mvc;
+using UserAppointments = Hospital.Dal.Models.UserAppointments;
 
 namespace Hospital.Services.Controllers
 {
@@ -99,20 +101,6 @@ namespace Hospital.Services.Controllers
 
         }
         [HttpGet]
-        public JsonResult GetUserAppointments(String id)
-        {
-            List <Appontment> userAppointments = new List<Appontment>();
-            try
-            {
-                userAppointments = Repo.UserAppointments(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return Json(userAppointments);
-        }
-        [HttpGet]
         public JsonResult DoctorAppointments(int DoctorId)
         {
             List<Appontment> doctorAppointments = new List<Appontment>();
@@ -140,6 +128,35 @@ namespace Hospital.Services.Controllers
                 result = false;
             }
             return Json(result);
+        }
+
+        [HttpGet]
+        public JsonResult getUsersAppointmentsList(string emailId)
+        {
+            
+            List<UserAppointments> ListDalType = new List<UserAppointments>();
+            List<Models.UserAppointments> listServType = new List<Models.UserAppointments>();
+            try
+            {
+                ListDalType = Repo.GetUserAppointments(emailId);
+                foreach (UserAppointments item in ListDalType)
+                {
+                    Models.UserAppointments obj = new Models.UserAppointments();
+                    obj.AppointmentDT = item.AppointmentDT;
+                    obj.HospitalName = item.HospitalName;
+                    obj.HospitalAddress = item.HospitalAddress;
+                    obj.HospitalContact = item.HospitalContact;
+                    obj.DoctorName = item.DoctorName;  
+                    listServType.Add(obj);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return Json(listServType);
         }
         #endregion
 

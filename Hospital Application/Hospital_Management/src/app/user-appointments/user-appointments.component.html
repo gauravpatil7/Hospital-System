@@ -1,1 +1,23 @@
-<p>user-appointments works!</p>
+<div class="CardGrid">
+  <mat-card *ngFor="let users of userAppointmentsList">
+    <mat-card-header>
+      <mat-card-title>
+        Dr. {{users.doctorName}}
+        <mat-card-subtitle>{{users.hospitalName}}</mat-card-subtitle>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>{{users.appointmentDT}}</h3>
+      <p>{{users.hospitalAddress}}</p>
+    </mat-card-content>
+    <button class="btn" (click)="call()" mat-raised-button>
+      <mat-icon>call</mat-icon>
+      <span>{{users.hospitalContact}}</span>
+    </button>
+    <button class="btn" (click)="cancelAppintment()" mat-raised-button>
+      <mat-icon>home</mat-icon>
+      <span>Cancel Appointment</span>
+    </button>
+  </mat-card>
+</div>
+

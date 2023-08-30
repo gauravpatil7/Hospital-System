@@ -5,6 +5,8 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
 import { NormalNavComponent } from './normal-nav/normal-nav.component';
 import { DoctorsAppointmentsComponent } from './doctors-appointments/doctors-appointments.component';
 import { authGuard } from '../auth.guard';
+import { BookAppointmentsComponent } from './book-appointments/book-appointments.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', component: DoctorsListComponent },
@@ -13,7 +15,8 @@ const routes: Routes = [
   { path: 'doctorslist', component: DoctorsListComponent, canActivate: [authGuard] },
   { path: 'userAppointments', component: UserAppointmentsComponent, canActivate: [authGuard] },
   { path: 'doctorAppointments', component: DoctorsAppointmentsComponent, canActivate: [authGuard] },
-  { path: 'bookAppointments', component: UserAppointmentsComponent, canActivate: [authGuard] },
+  { path: 'bookAppointments', component: BookAppointmentsComponent, canActivate: [authGuard] },
+  { path: 'aboutUs', component: AboutUsComponent},
 ];
 
 @NgModule({

@@ -100,3 +100,39 @@ select * from HOSPITAL
 select * from USERS
 select * from DOCTORS
 select * from APPONTMENTS
+GO
+
+---------------------------------------------------------------
+--TABLE VALUED FUNCTION
+CREATE FUNCTION UFN_USERAPPOINTMENTS_BY_ID(@mailId varchar(30))
+RETURNS TABLE
+AS
+RETURN(
+SELECT D.DNAME , A.APPOINTMENTTIME , H.HOSPITALNAME, H.HOSPITALADDRESS, H.CONTACT
+FROM DOCTORS D JOIN APPONTMENTS A ON D.DID = A.DOCTORID
+JOIN HOSPITALL H ON H.HOSPITALID = A.HOSPITALID WHERE A.USERID ='gp@v.com'
+);
+GO
+
+-----------------------------------------------------------------
+--STORED PROCEDURE
+
+CREATE PROCEDURE USP_USERREGISTER(
+ @mailid varchar(30),
+ @username varchar(20),
+ @gender varchar(6),
+ @pastproblems varchar(50),
+ @contact bigint,
+ @useraddress varchar(50),
+ @password varchar(50),
+ @firstname varchar(10),
+ @lastname varchar(10)
+)
+AS 
+BEGIN
+insert into USERS values 
+(
+@mailid, @username, @gender, @pastproblems, @contact, @useraddress, @password, @firstname, @lastname 
+)
+END
+GO

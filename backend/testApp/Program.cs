@@ -4,6 +4,20 @@ using Hospital.Dal;
 using Hospital.Dal.Models;
 
 HospitalRepo Hr= new HospitalRepo();
+
+
+List<UserAppointments> ll= new List<UserAppointments>();
+ll = Hr.GetUserAppointments("gp@v.com");
+Console.WriteLine("count :"+ll.Count) ;
+foreach (UserAppointments item in ll)
+{
+    Console.WriteLine(item.HospitalName);
+    Console.WriteLine(item.AppointmentDT);
+    Console.WriteLine(item.HospitalAddress);
+    Console.WriteLine(item.HospitalContact);
+    Console.WriteLine(  "---------------------------------------------------");
+}
+
 //List<Hospitall> hl = new List<Hospitall>();
 //hl = Hr.GetHospitals();
 //bool result = false;//= Hr.CheckValidUser("GAURAVPATIL2360@GMAIL.COM", "3454");
@@ -19,16 +33,16 @@ HospitalRepo Hr= new HospitalRepo();
 //}
 
 
-User user = new User();
-user.Mailid = "gauravvidyu";
-user.Password = "gauravvidyu";
-user.Pastproblems = "gauravvidyu";
-user.Contactumber = 3456789;
-user.Username = "gauravvidyu";
-user.Useraddress = "gauravvidyu";
-user.Firstname = "gauravvidyu";
-user.Lastname = "gauravvidyu";
-user.Gender = "MALE";
+//User user = new User();
+//user.Mailid = "gauravvidyu";
+//user.Password = "gauravvidyu";
+//user.Pastproblems = "gauravvidyu";
+//user.Contactumber = 3456789;
+//user.Username = "gauravvidyu";
+//user.Useraddress = "gauravvidyu";
+//user.Firstname = "gauravvidyu";
+//user.Lastname = "gauravvidyu";
+//user.Gender = "MALE";
 
-bool r =Hr.registerNewUser(user);
-Console.WriteLine(  r);
+//bool r =Hr.registerNewUser(user);
+//Console.WriteLine(  r);
