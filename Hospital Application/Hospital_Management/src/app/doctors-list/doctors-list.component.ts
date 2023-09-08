@@ -10,7 +10,7 @@ import { IUserAppointments } from '../Interfaces/UserAppointments';
   styleUrls: ['./doctors-list.component.css']
 })
 export class DoctorsListComponent {
-  DoctorList:any;
+  DoctorList: any;
   constructor(private DoctorsService: DoctorsService, private _router: Router) {
   }
   ngOnInit() {
@@ -24,5 +24,9 @@ export class DoctorsListComponent {
         console.log(this.DoctorList);
       }
     );
+  }
+  bookAppointment(doctor: any) {
+    console.log(doctor.did);
+    this._router.navigate(['/bookAppointments', doctor.worksin, doctor.did]);
   }
 }

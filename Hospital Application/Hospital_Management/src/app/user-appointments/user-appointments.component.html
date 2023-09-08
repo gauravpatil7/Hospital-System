@@ -14,7 +14,7 @@
       <mat-icon>call</mat-icon>
       <span>{{users.hospitalContact}}</span>
     </button>
-    <button class="btn" (click)="cancelAppintment()" mat-raised-button>
+    <button class="btn" (click)="cancelAppintment(users.appontmentid)" mat-raised-button>
       <mat-icon>home</mat-icon>
       <span>Cancel Appointment</span>
     </button>

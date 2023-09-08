@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'userAppointments', component: UserAppointmentsComponent, canActivate: [authGuard] },
   { path: 'doctorAppointments', component: DoctorsAppointmentsComponent, canActivate: [authGuard] },
   { path: 'bookAppointments', component: BookAppointmentsComponent, canActivate: [authGuard] },
+  { path: 'bookAppointments/:Worksin/:Did', component: BookAppointmentsComponent, canActivate: [authGuard] },
   { path: 'aboutUs', component: AboutUsComponent},
 ];
 
@@ -24,7 +25,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-
   constructor() {
 
   }

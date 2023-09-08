@@ -30,10 +30,14 @@ export class LoginComponent {
   
   login: boolean;
   emailRef: string;
-  gender: string="";
+  gender: string = "";
+  userId: string;
   constructor(private _service: DoctorsService, private router: Router) {
     this.login = false;
     this.emailRef = "";
+    this.userId = <string>sessionStorage.getItem('username');
+    console.log(this.userId);
+
   }
   ngOnInit() {
   }
@@ -54,7 +58,10 @@ export class LoginComponent {
           sessionStorage.setItem('Email', this.emailRef);
           //needs to implement
           sessionStorage.setItem('username', this.emailRef);
+          window.alert("Login Successfull");
           window.location.reload();
+        } else {
+          window.alert("Please, Check UserId or Password and try again!");
         }
       }
     );
@@ -62,7 +69,6 @@ export class LoginComponent {
   //selector
   selectorOnChange($event: any) {
     this.gender = $event.value;
-    console.log(this.gender);
   }
 
   //register
@@ -83,7 +89,7 @@ export class LoginComponent {
     this._service.registerNewUser(newUserObj).subscribe(
       (res) => {
         if (res == true) {
-          console.log("register successfully");
+          window.alert("register successfully");
           sessionStorage.setItem('username', newUserObj.Firstname);
           sessionStorage.setItem('Email', newUserObj.Mailid);
           this.router.navigate(['']);
@@ -93,6 +99,5 @@ export class LoginComponent {
         }
       }
     );
-    console.log(this.registerForm.value);
   }
 }

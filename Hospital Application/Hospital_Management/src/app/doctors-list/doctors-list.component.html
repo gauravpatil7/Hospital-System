@@ -9,7 +9,7 @@
     </mat-card-header>
     <img class="img" mat-card-image src={{doctor.dimage}}>
     <mat-card-actions>
-      <button routerLink="/bookAppointments" class="btn" mat-raised-button>
+      <button (click)="bookAppointment((doctor))" class="btn" mat-raised-button>
         Book Appointment
       </button>
     </mat-card-actions>

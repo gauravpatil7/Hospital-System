@@ -1,6 +1,8 @@
 ﻿using Hospital.Dal.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -123,22 +125,7 @@ namespace Hospital.Dal
         //    }
         //}
 
-        public Doctor GetDoctorsById(int id)
-        {
-            Doctor Doc = new Doctor();
-            try
-            {
-                Doc = (from d in HpContext.Doctors where d.Did == id select d).First<Doctor>();
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return Doc;
-        }
+        
         public List<Appontment> UserAppointments(String userId)
         {
             List<Appontment> userAppointmentList = new List<Appontment>();
@@ -166,20 +153,6 @@ namespace Hospital.Dal
             return Dl;
         }
 
-        public Hospitall GetHospitalById(int HId)
-        {
-            Hospitall hospital = new Hospitall();
-            try
-            {
-                hospital = (from h in HpContext.Hospitalls where h.Hospitalid == HId select h).First();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            return hospital;
-        }
 
         public List<UserAppointments> GetUserAppointments(string emailId)
         {
@@ -198,9 +171,88 @@ namespace Hospital.Dal
             return ll;
         }
 
+        //book Appointment start________________________________________________________________
+        //public Doctor GetDoctorsById(int id)
+        //{
+        //    Doctor Doc = new Doctor();
+        //    try
+        //    {
+        //        Doc = (from d in HpContext.Doctors where d.Did == id select d).First<Doctor>();
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    return Doc;
+        //}
+        //public Hospitall GetHospitalById(int HId)
+        //{
+        //    Hospitall hospital = new Hospitall();
+        //    try
+        //    {
+        //        hospital = (from h in HpContext.Hospitalls where h.Hospitalid == HId select h).First();
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    return hospital;
+        //}
+
+        //public List<Hospitall> getHospitalsList()
+        //{
+        //    List<Hospitall> hospitalList = new List<Hospitall> ();
+        //    try
+        //    {
+        //        hospitalList = (from l in HpContext.Hospitalls select l).ToList();
+        //    }
+        //    catch (Exception)
+        //    {
+                
+        //        throw;
+        //    }
+        //    return hospitalList;
+        //}
+
+        public List<Doctor> getDoctorsList()
+        {
+            List<Doctor> DoctorsList = new List<Doctor>();
+            try
+            {
+                DoctorsList = (from l in HpContext.Doctors select l).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return DoctorsList;
+        }
+
         #endregion
 
         #region add
+        public int AddAppointments(Appontment appointmentObj)
+        {
+            int returnResult = 0;
+            int numberofrowsaffected = 0;
+            SqlParameter APPOINTMENTTIME = new SqlParameter("@APPOINTMENTTIME", appointmentObj.Appointmenttime);
+            SqlParameter USERID = new SqlParameter("@USERID", appointmentObj.Userid);
+            SqlParameter DOCTORID = new SqlParameter("@DOCTORID", appointmentObj.Doctorid);
+            SqlParameter HOSPITALID = new SqlParameter("@HOSPITALID", appointmentObj.Hospitalid);
+
+            SqlParameter returnResultPrm = new SqlParameter("@RETURNRESULT", System.Data.SqlDbType.Int);
+            returnResultPrm.Direction = System.Data.ParameterDirection.Output;
+            numberofrowsaffected = HpContext.Database.ExecuteSqlRaw("EXEC @RETURNRESULT= USP_INSERT_APPOINTMENTS @HOSPITALID, @USERID, @DOCTORID, @APPOINTMENTTIME", APPOINTMENTTIME, USERID, DOCTORID, HOSPITALID, returnResultPrm);
+
+            returnResult = Convert.ToInt32(returnResultPrm.Value);
+            Console.WriteLine(returnResult);
+            return returnResult;
+        }
         #endregion
 
         #region update
@@ -208,22 +260,23 @@ namespace Hospital.Dal
 
         #region delete
 
-        public bool deleteUser(int UserId)
+        public bool removeUserAppointment(int appointmentId )
         {
             bool status = false;
             try
             {
-                User user = new User();
-                //user = HpContext.Users.Find(UserId);
-                if (user != null)
+                Appontment appointment = HpContext.Appontments.Find( appointmentId );
+                if ( appointment != null )
                 {
-                    status = true;
+                    Console.WriteLine( appointment.Appontmentid );
+                    HpContext.Appontments.Remove(appointment);
+                    HpContext.SaveChanges();
+                    status=true;
                 }
             }
             catch (Exception)
             {
-
-                status = false;
+                throw;
             }
             return status;
         }

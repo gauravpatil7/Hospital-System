@@ -84,22 +84,7 @@ namespace Hospital.Services.Controllers
 
         #region get by Id
 
-        [HttpGet]
-        public JsonResult GetDoctorsById(int id)
-        {
-            Doctor Doc = new Doctor();
-            try
-            {
-                Doc = Repo.GetDoctorsById(id);
-                return Json(Doc);
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-
-        }
         [HttpGet]
         public JsonResult DoctorAppointments(int DoctorId)
         {
@@ -146,7 +131,8 @@ namespace Hospital.Services.Controllers
                     obj.HospitalName = item.HospitalName;
                     obj.HospitalAddress = item.HospitalAddress;
                     obj.HospitalContact = item.HospitalContact;
-                    obj.DoctorName = item.DoctorName;  
+                    obj.DoctorName = item.DoctorName;
+                    obj.Appontmentid = item.Appontmentid;
                     listServType.Add(obj);
                 }
             }
@@ -157,6 +143,88 @@ namespace Hospital.Services.Controllers
             }
 
             return Json(listServType);
+        }
+
+        // bookAppointments Component API methods
+        //[HttpGet]
+        //public JsonResult GetDoctorsById(int id)
+        //{
+        //    Doctor doctor = new Doctor();
+        //    try
+        //    {
+        //        doctor = Repo.GetDoctorsById(id);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    return Json(doctor);
+        //}
+
+        //[HttpGet]
+        //public JsonResult GetHospitalsById(int id)
+        //{
+        //    Hospitall hospital = new Hospitall();
+        //    try
+        //    {
+        //        hospital = Repo.GetHospitalById(id);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    return Json(hospital);
+        //}
+        //[HttpGet]
+        //public JsonResult getHospitalsList()
+        //{
+        //    List<Hospitall> hospitalsList = new List<Hospitall>();
+        //    try
+        //    {
+        //        hospitalsList = Repo.getHospitalsList();
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    return Json(hospitalsList);
+        //}
+
+        [HttpGet]
+        public JsonResult getDoctorsList()
+        {
+            List<Doctor> DoctorsList = new List<Doctor>();
+            try
+            {
+                DoctorsList = Repo.getDoctorsList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Json(DoctorsList);
+        }
+        #endregion
+
+        #region Delete
+        [HttpDelete]
+        public JsonResult removeUserAppointment(int aId)
+        {
+            bool status = false;
+            try
+            {
+                status = Repo.removeUserAppointment(aId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Json(status);
         }
         #endregion
 
@@ -175,6 +243,22 @@ namespace Hospital.Services.Controllers
                 return status;
             }
         }
+
+        [HttpPost]
+        public JsonResult addAppointment(Appontment newAppointment)
+        {
+            int result = 0;
+            try
+            {
+                result= Repo.AddAppointments(newAppointment);
+            }
+            catch
+            {
+                result = -99;
+            }
+            return Json(result);
+        }
+
         #endregion
     }
 }

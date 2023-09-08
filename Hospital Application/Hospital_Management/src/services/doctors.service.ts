@@ -4,6 +4,7 @@ import { Observable, catchError, take, throwError } from 'rxjs';
 import { IDoctor } from '../app/Interfaces/Doctor';
 import { IUser } from '../app/Interfaces/User';
 import { IUserAppointments } from '../app/Interfaces/UserAppointments';
+import { IHospital } from '../app/Interfaces/Hospital';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,6 @@ export class DoctorsService {
     let temp = this.http.get<IDoctor[]>('https://localhost:7031/home/GetDoctors').pipe(catchError(this.errorhandler));
     return temp;
   }
-
 
   CheckValidUser(userName: string, password: string): Observable<boolean> {
     let userObj: IUser;
@@ -33,11 +33,29 @@ export class DoctorsService {
   }
 
   getUsersAppointmentsList(mailId: string): Observable<IUserAppointments[]> {
-    //const param = { emailId: mailId }
-    let result = this.http.get<IUserAppointments[]>('https://localhost:7031/home/getUsersAppointmentsList?emailId=gp@v.com').pipe(catchError(this.errorhandler));
+    //let param = { emailId: mailId }
+    //let result = this.http.post<IUserAppointments[]>('https://localhost:7031/home/getUsersAppointmentsList', param).pipe(catchError(this.errorhandler));
+    //let result = this.http.get<IUserAppointments[]>('$https://localhost:7031/home/getUsersAppointmentsList?emailId=abcd@gmail.COM{}').pipe(catchError(this.errorhandler));
+    let param = new HttpParams().append("emailId", mailId);
+    let result = this.http.get<IUserAppointments[]>('https://localhost:7031/home/getUsersAppointmentsList', { params:param }).pipe(catchError(this.errorhandler));
     return result;
   }
 
+  getHospitalsList(): Observable<IHospital[]> {
+    let result = this.http.get<IHospital[]>('https://localhost:7031/home/getHospitalsList').pipe(catchError(this.errorhandler));
+    return result;
+  }
+  addNewAppointment(dat: Date, userId: string, hId: number, dId: number): Observable<number> {
+    let body = { Appontmentid: 1, Appointmenttime: dat, userId: userId, Hospitalid: hId, Doctorid: dId }
+    let result = this.http.post<number>('https://localhost:7031/home/addappointment', body ).pipe(catchError(this.errorhandler));
+    return result;
+  }
+  //delete
+  removeUserAppointment(appointment: number): Observable<boolean> {
+    let httpOptions = new HttpParams().append('aId', appointment)
+    let result = this.http.delete<boolean>('https://localhost:7031/home/removeUserAppointment', { params: httpOptions }).pipe(catchError(this.errorhandler));
+    return result;
+  }
   errorhandler(error: HttpErrorResponse) {
     console.log(error.message)
     return throwError(error.message || "Server Error");

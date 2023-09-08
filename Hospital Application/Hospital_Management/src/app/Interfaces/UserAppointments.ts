@@ -4,4 +4,5 @@ export interface IUserAppointments {
   HospitalContact: number;
   DoctorName: string;
   AppointmentDT: Date;
+  Appontmentid: number;
 }
