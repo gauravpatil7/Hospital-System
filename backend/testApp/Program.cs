@@ -61,15 +61,16 @@ HospitalRepo Hr= new HospitalRepo();
 //''gp@v.com'
 
 
-//List<UserAppointments> ll= new List<UserAppointments>();
-//ll = Hr.GetUserAppointments("abcd@gmail.COM");
-//foreach (UserAppointments item in ll)
-//{
-//    Console.WriteLine( item.Appontmentid );
-//    Console.WriteLine( item.DoctorName );
-//    Console.WriteLine( item.HospitalAddress );
-//    Console.WriteLine( item.HospitalName );
-//    Console.WriteLine( item.HospitalContact );
-//}
-bool a= Hr.removeUserAppointment(10008);
-Console.WriteLine(a);
+List<UserAppointments> ll = new List<UserAppointments>();
+ll = Hr.GetUserAppointments("abcd@gmail.COM");
+foreach (UserAppointments item in ll)
+{
+    Console.WriteLine(item.Appontmentid);
+    Console.WriteLine(item.DoctorName);
+    Console.WriteLine(item.HospitalAddress);
+    Console.WriteLine(item.HospitalName);
+    Console.WriteLine(item.HospitalContact);
+}
+
+//bool a= Hr.removeUserAppointment(10008);
+//Console.WriteLine(a);

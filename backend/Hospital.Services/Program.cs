@@ -16,7 +16,7 @@ namespace Hospital.Services
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200", "https://hospital-system-m.web.app")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });

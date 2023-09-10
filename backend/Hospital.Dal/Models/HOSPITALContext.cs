@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace Hospital.Dal.Models
 {
@@ -24,11 +25,19 @@ namespace Hospital.Dal.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=HOSPITAL;Trusted_Connection=True;");
+//            }
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            string a = config.GetConnectionString("HOSPITALDBConnectionString");
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=HOSPITAL;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(a);
             }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -90,7 +99,7 @@ namespace Hospital.Dal.Models
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("DIMAGE")
-                    .HasDefaultValueSql("('../../../')");
+                    .HasDefaultValueSql("('../../assets/Doctor/d1.jpg')");
 
                 entity.Property(e => e.Dname)
                     .HasMaxLength(30)
@@ -131,7 +140,7 @@ namespace Hospital.Dal.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("HOSPITALIMAGE")
-                    .HasDefaultValueSql("('../../')");
+                    .HasDefaultValueSql("('../../../PATILHOSPITAL.JPG')");
 
                 entity.Property(e => e.Hospitalname)
                     .HasMaxLength(50)
@@ -172,6 +181,10 @@ namespace Hospital.Dal.Models
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("USERNAME");
+
+                entity.Property(e => e.Firstname).HasMaxLength(10).IsUnicode(false).HasColumnName("FIRSTNAME");
+                entity.Property(e => e.Lastname).HasMaxLength(10).IsUnicode(false).HasColumnName("LASTNAME");
+                entity.Property(e => e.Password).HasMaxLength(50).IsUnicode(false).HasColumnName("PASSWORD");
             });
 
             OnModelCreatingPartial(modelBuilder);
