@@ -39,38 +39,38 @@ HospitalRepo Hr= new HospitalRepo();
 //    Console.WriteLine( item.Hospitalname);
 //    Console.WriteLine( item.Hospitaladdress);
 //    Console.WriteLine( item.Hospitalimage);
-//    Console.WriteLine(  "---------------------------------------------------------");
+////    Console.WriteLine(  "---------------------------------------------------------");
+////}
+
+
+User user = new User();
+user.Mailid = "abcd@gmail.COMm";
+user.Password = "1212";
+user.Pastproblems = "HEART DESEASE";
+user.Contactumber = 8788874025;
+user.Username = "Jack Martin";
+user.Useraddress = "NEAR SHIVAJI MAHARAJ STATUE, FAGNE";
+user.Firstname = "gaurav";
+user.Lastname = "patil";
+user.Gender = "FEMALE";
+
+
+bool r = Hr.registerNewUser(user);
+Console.WriteLine(r);
+
+//''gp @v.com'
+
+
+//List<UserAppointments> ll = new List<UserAppointments>();
+//ll = Hr.GetUserAppointments("abcd@gmail.COM");
+//foreach (UserAppointments item in ll)
+//{
+//    Console.WriteLine(item.Appontmentid);
+//    Console.WriteLine(item.DoctorName);
+//    Console.WriteLine(item.HospitalAddress);
+//    Console.WriteLine(item.HospitalName);
+//    Console.WriteLine(item.HospitalContact);
 //}
-
-
-//User user = new User();
-//user.Mailid = "gauravvidyu";
-//user.Password = "gauravvidyu";
-//user.Pastproblems = "gauravvidyu";
-//user.Contactumber = 3456789;
-//user.Username = "gauravvidyu";
-//user.Useraddress = "gauravvidyu";
-//user.Firstname = "gauravvidyu";
-//user.Lastname = "gauravvidyu";
-//user.Gender = "MALE";
-
-
-//bool r =Hr.registerNewUser(user);
-//Console.WriteLine(  r);
-
-//''gp@v.com'
-
-
-List<UserAppointments> ll = new List<UserAppointments>();
-ll = Hr.GetUserAppointments("abcd@gmail.COM");
-foreach (UserAppointments item in ll)
-{
-    Console.WriteLine(item.Appontmentid);
-    Console.WriteLine(item.DoctorName);
-    Console.WriteLine(item.HospitalAddress);
-    Console.WriteLine(item.HospitalName);
-    Console.WriteLine(item.HospitalContact);
-}
 
 //bool a= Hr.removeUserAppointment(10008);
 //Console.WriteLine(a);

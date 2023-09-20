@@ -304,12 +304,14 @@ EXEC USP_USERREGISTER @mailid, @username, @gender, @pastproblems, @contact, @use
                 SqlParameter lastname = new SqlParameter("@lastname", newUserObj.Lastname);
 
                 result = HpContext.Database.ExecuteSqlRaw("EXEC USP_USERREGISTER @mailid, @username, @gender, @pastproblems, @contact, @useraddress, @password, @firstname, @lastname", Email, username, gender, pastproblems, contact, useraddress, password, firstname, lastname);
+                Console.WriteLine("result : {0}", result);
                 if (result > 0)
                 {
                     return true;
                 }
                 else
                 {
+                    
                     return false;
                 }
             }

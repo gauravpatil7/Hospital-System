@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-normal-nav',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./normal-nav.component.css']
 })
 export class NormalNavComponent {
+  @ViewChild(LoginComponent)
+  btnType!:LoginComponent;
+  status:string = '';
 
+  // ngOnInit(){
+  //   this.status=this.btnType.btnType;
+  // }
+
+  ngAfterViewInit(){
+    this.status=this.btnType.btnType;
+    console.log(this.status);
+  }
+  constructor(){
+  }
 }
+

@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,8 @@ export class NavComponent {
 
   @ViewChild(MatSidenav)
   navBar!: MatSidenav;
-  constructor(private observer: BreakpointObserver) {
+
+  constructor(private observer: BreakpointObserver, private _router: Router) {
 
   }
   ngOnInit() {
@@ -32,5 +34,10 @@ export class NavComponent {
   }
   munuClicked() {
     this.navBar.toggle();
+  }
+  logOut(){
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('Email');
+    window.location.reload();
   }
 }

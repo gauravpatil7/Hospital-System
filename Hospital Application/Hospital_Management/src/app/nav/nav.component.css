@@ -17,7 +17,10 @@ mat-sidenav {
   border-radius: 16px;
   padding: 10px;
 }
+.spacer{
+  flex:1;
 
+}
 .content {
   background: rgb(248, 241, 252);
   margin: 10px;

@@ -11,14 +11,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.form-container {
+/* .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background: white;
   padding:20px;
   border-radius:16px;
-}
+} */
 mat-form-field {
   width: 60vw;
 }

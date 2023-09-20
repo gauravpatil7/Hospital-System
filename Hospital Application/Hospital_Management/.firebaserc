@@ -1,14 +1,5 @@
 {
   "projects": {
-    "default": "hospital-app-m"
-  },
-  "targets": {
-    "hospital-app-m": {
-      "hosting": {
-        "Hospital_Management": [
-          "hospital-app-m"
-        ]
-      }
-    }
+    "default": "hospital-system-m"
   }
 }

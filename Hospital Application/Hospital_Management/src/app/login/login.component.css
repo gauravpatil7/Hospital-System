@@ -1,0 +1,8 @@
+mat-card{
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+    margin-bottom: 100px;
+    min-height: calc(100vh-30px);
+}

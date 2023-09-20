@@ -3,6 +3,7 @@ import { FormGroup, FormControlName, FormControl, EmailValidator, Validators } f
 import { DoctorsService } from '../../services/doctors.service';
 import { IUser } from '../Interfaces/User';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,37 +16,41 @@ export class LoginComponent {
     passwordRef: new FormControl('', [Validators.minLength(4), Validators.maxLength(10), /*Validators.pattern('[a-z0-9A-Z]')*/]),
   });
 
-
-  registerForm = new FormGroup({
-    mailId: new FormControl('', [Validators.email, Validators.required]),
-    username: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
-    pastproblems: new FormControl(''),
-    contactNumber: new FormControl(234567890, [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
-    userAddress: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), /*Validators.pattern('[a-z0-9A-Z]')*/]),
-    firstName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10),Validators.required]),
-    lastName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
-  });
-
-  
-  login: boolean;
-  emailRef: string;
-  gender: string = "";
-  userId: string;
-  constructor(private _service: DoctorsService, private router: Router) {
+  constructor(private _service: DoctorsService, private router: Router, private _snackbar: MatSnackBar) {
     this.login = false;
     this.emailRef = "";
     this.userId = <string>sessionStorage.getItem('username');
     console.log(this.userId);
 
   }
+  login: boolean;
+  emailRef: string;
+  gender: string = "";
+  userId: string;
+  btnType:string = 'Register';
+
   ngOnInit() {
   }
+
+  registerForm = new FormGroup({
+    mailId: new FormControl('', [Validators.email, Validators.required]),
+    username: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
+    pastproblems: new FormControl(''),
+    contactNumber: new FormControl(0,[Validators.min(1111111111), Validators.max(9999999999), Validators.required]),
+    userAddress: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12), /*Validators.pattern('[a-z0-9A-Z]')*/]),
+    firstName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10),Validators.required]),
+    lastName: new FormControl('', [Validators.minLength(3), Validators.maxLength(10), Validators.required]),
+  });
+
+
   //btnchange
   logOrReg(btnType: string) {
-    if (btnType == 'login') {
+    if (btnType == 'Login') {
+      this.btnType='Login';
       this.login = true;
     } else {
+      this.btnType='Register';
       this.login = false;
     }
   }
@@ -58,10 +63,10 @@ export class LoginComponent {
           sessionStorage.setItem('Email', this.emailRef);
           //needs to implement
           sessionStorage.setItem('username', this.emailRef);
-          window.alert("Login Successfull");
+          this._snackbar.open('You are logged in successfully');
           window.location.reload();
         } else {
-          window.alert("Please, Check UserId or Password and try again!");
+          this._snackbar.open('Please, check userId or password','Try again!');
         }
       }
     );
@@ -86,16 +91,16 @@ export class LoginComponent {
       Lastname: <string>this.registerForm.value.lastName,
     };
 
+    
     this._service.registerNewUser(newUserObj).subscribe(
       (res) => {
         if (res == true) {
-          window.alert("register successfully");
           sessionStorage.setItem('username', newUserObj.Firstname);
           sessionStorage.setItem('Email', newUserObj.Mailid);
-          this.router.navigate(['']);
-          this.ngOnInit();
+          window.location.reload();
+          this._snackbar.open("Registration successfull","Dismiss");
         } else {
-          console.log("register unsuccessful");
+          this._snackbar.open("cannot register please check your connection","Dismiss");
         }
       }
     );
