@@ -28,7 +28,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 //import { MatDatepickerModule } from '@angular/material/datepicker';
 //import { MatNativeDateModule } from '@angular/material/core'
-import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars'
+import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component'
 
 
 
@@ -43,6 +44,7 @@ import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars'
     DoctorsAppointmentsComponent,
     BookAppointmentsComponent,
     AboutUsComponent,
+    EditUserProfileComponent,
 
   ],
   imports: [

@@ -11,6 +11,7 @@ import { IUserAppointments } from '../Interfaces/UserAppointments';
 })
 export class DoctorsListComponent {
   DoctorList: any;
+  isDataAvailable:boolean= false;
   constructor(private DoctorsService: DoctorsService, private _router: Router) {
   }
   ngOnInit() {
@@ -21,7 +22,9 @@ export class DoctorsListComponent {
     this.DoctorsService.getDoctors().subscribe(
       (resSuccess) => {
         this.DoctorList = resSuccess;
-        console.log(this.DoctorList);
+        if(this.DoctorList.length>0){
+          this.isDataAvailable=true;
+        }
       }
     );
   }

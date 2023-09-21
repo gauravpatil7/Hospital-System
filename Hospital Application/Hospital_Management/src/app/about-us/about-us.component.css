@@ -1,5 +1,21 @@
 p {
-  text-align: justify;
+  text-align: center;
   margin-left: 30px;
   margin-right: 30px;
+}
+
+.btn {
+  height: 40px;
+  width: 120px;
+  margin: 10px;
+  border-radius: 5px;
+  border-style: none;
+  color: white;
+}
+
+.btn:hover {
+  position: relative;
+  top: -5px;
+  left: -5px;
+  box-shadow: 0 12px 16px 0 rgba(111, 92, 255, 0.24), 0 17px 50px 0 rgba(113, 113, 255, 0.19);
 }

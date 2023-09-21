@@ -1,4 +1,4 @@
-<div class="CardGrid">
+<div *ngIf="isDataAvailable; else elseblock" class="CardGrid">
 <div *ngFor="let doctor of DoctorList">
   <mat-card>
     <mat-card-header>
@@ -16,3 +16,6 @@
   </mat-card>
 </div>
 </div>
+<ng-template #elseblock>
+  <h2>doctor's not available</h2>
+</ng-template>

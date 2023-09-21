@@ -20,7 +20,7 @@ export class BookAppointmentsComponent {
 
   constructor(private _router: Router, private _service: DoctorsService,
      private _route: ActivatedRoute, private _MatSnackBar:MatSnackBar) {
-    this.userId = <string>sessionStorage.getItem('username');
+    this.userId = <string>sessionStorage.getItem('Email');
     this.hId = this._route.snapshot.params['Worksin'];
     this.dId = this._route.snapshot.params['Did'];
   }

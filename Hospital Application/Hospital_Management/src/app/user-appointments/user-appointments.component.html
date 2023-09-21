@@ -1,4 +1,4 @@
-<div class="CardGrid">
+<div *ngIf="isDataAvailabele; else elseBlock" class="CardGrid">
   <mat-card *ngFor="let users of userAppointmentsList">
     <mat-card-header>
       <mat-card-title>
@@ -20,4 +20,7 @@
     </button>
   </mat-card>
 </div>
-
+<ng-template #elseBlock>
+<h2 style="color: black;">You don't have any appointment</h2>
+<button mat-raised-button color="primary" routerLink="/">Book Here</button>
+</ng-template>

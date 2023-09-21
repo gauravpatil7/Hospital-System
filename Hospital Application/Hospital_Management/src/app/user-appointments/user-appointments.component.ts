@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { IUser } from '../Interfaces/User';
 import { DoctorsService } from '../../services/doctors.service';
-import { IUserAppointments } from '../Interfaces/UserAppointments';
 import { ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-user-appointments',
@@ -15,17 +12,21 @@ export class UserAppointmentsComponent {
 
   userAppointmentsList: any;
   mail: string = "";
+  isDataAvailabele:boolean = false;
   constructor(private _service: DoctorsService, private _route: ActivatedRoute,
      private _snack: MatSnackBar) {
   }
   ngOnInit() {
     //modify it
-    this.mail = <string>sessionStorage.getItem("username");
-    this.getUsersAppointmentsList(this.mail)
+    this.mail = <string>sessionStorage.getItem("Email");
+    this.getUsersAppointmentsList(this.mail);
   }
   getUsersAppointmentsList(mailId: string) {
     this._service.getUsersAppointmentsList(mailId).subscribe((res) => {
-      this.userAppointmentsList = res
+      this.userAppointmentsList = res;
+      if(this.userAppointmentsList.length>0){
+        this.isDataAvailabele=true;
+      }
     });
   }
   cancelAppintment(aId: number) {

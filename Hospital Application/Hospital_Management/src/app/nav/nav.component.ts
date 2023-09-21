@@ -40,4 +40,7 @@ export class NavComponent {
     sessionStorage.removeItem('Email');
     window.location.reload();
   }
+  editProfile(){
+    
+  }
 }
